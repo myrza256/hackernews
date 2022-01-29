@@ -1,4 +1,4 @@
-# Python test assessment by DevelopsToday
+# Python test assessment from the DevelopsToday
 
 
 ## Local Installing
