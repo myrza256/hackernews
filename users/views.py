@@ -60,5 +60,5 @@ class LoginView(generics.GenericAPIView):
 
 class UserListView(generics.ListAPIView):
     queryset = User.objects.all()
-    serializer_class = LoginSerializer
+    serializer_class = UserSerializer
 
