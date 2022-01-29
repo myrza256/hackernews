@@ -33,7 +33,7 @@ class PostViewSet(viewsets.ModelViewSet):
     @action(methods=['post'], detail=True)
     def upvote(self, request, pk, *args, **kwargs):
         post = get_object_or_404(Post, id=pk)
-        check_user_voted = Post.objects.filter(voted_by=request.user)
+        check_user_voted = Post.objects.filter(id=pk, voted_by=request.user)
         if not check_user_voted:
             post.voted_by.add(request.user)
             post.amount_of_votes += 1
