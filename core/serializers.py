@@ -6,8 +6,8 @@ from .models import Post, Comment
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = '__all__'
-        depth = 1
+        fields = ['id', 'title', 'amount_of_votes', 'author']
+        read_only_fields = ('voted_by', )
 
 
 class CommentSerializer(serializers.ModelSerializer):

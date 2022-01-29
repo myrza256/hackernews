@@ -1,7 +1,10 @@
+from operator import ge
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
 from knox.models import AuthToken
+
+from users.models import User
 from .serializers import RegisterSerializer, UserSerializer, LoginSerializer
 
 
@@ -11,7 +14,6 @@ class RegisterView(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        print("---in post")
         if serializer.is_valid():
             user = serializer.save()
             _, token = AuthToken.objects.create(user)
@@ -32,7 +34,7 @@ class RegisterView(generics.GenericAPIView):
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 
-# Login
+
 class LoginView(generics.GenericAPIView):
     serializer_class = LoginSerializer
 
@@ -54,3 +56,9 @@ class LoginView(generics.GenericAPIView):
             data = {'response': False,
                     'error_message': 'Invalid login or password'}
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = LoginSerializer
+

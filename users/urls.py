@@ -1,9 +1,11 @@
-from .views import *
-from django.urls import path, include
+from django.urls import path
 from knox import views as knox_views
 
+from users.views import UserListView, RegisterView, LoginView
+
 urlpatterns = [
-    path('register/', RegisterView.as_view()),
-    path('login/', LoginView.as_view()),
-    path('logout/', knox_views.LogoutView.as_view(), name='knox_logout')
+    path('users/', UserListView.as_view()),
+    path('users/register/', RegisterView.as_view()),
+    path('users/login/', LoginView.as_view()),
+    path('users/logout/', knox_views.LogoutView.as_view(), name='knox_logout')
 ]
